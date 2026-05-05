@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+    ============================================================
+    BLE Permissions
+    ============================================================
+    [면접 단골] "Android 12 이상에서 BLE 권한이 달라진 이유?"
+    - Android 11(API 30) 이하: BLE 스캔에 ACCESS_FINE_LOCATION 필요
+      (BLE 비콘으로 위치 추적 가능 → location 권한으로 묶었음)
+    - Android 12(API 31)+: BLUETOOTH_SCAN / BLUETOOTH_CONNECT / BLUETOOTH_ADVERTISE 분리
+      (location 의도 없음을 명시하면 위치 권한 안 받아도 됨 → neverForLocation)
+    ============================================================
+    -->
+
+    <!-- Android 11 이하 호환용 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+
+    <!-- BLE 스캔에 위치권한이 필요했던 시절 (~ Android 11) -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:maxSdkVersion="30" />
+
+    <!-- Android 12+ 신규 권한 -->
+    <!-- neverForLocation: "우리는 위치추적 안 합니다"라고 명시. 안 붙이면 FINE_LOCATION 추가로 받아야 함 -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="s" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <!-- BLE 하드웨어 미지원 기기에서 설치 안 되도록 -->
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <application
+        android:name=".WhoopBleApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.WhoopBLEPractice">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.WhoopBLEPractice">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
