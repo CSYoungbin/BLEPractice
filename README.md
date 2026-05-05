@@ -1,6 +1,6 @@
-# WHOOP Android Engineer II — BLE Practice
+# Android Engineer II — BLE Practice
 
-WHOOP Connectivity 팀의 Android Engineer II JD 를 기반으로 만든 **BLE 학습 프로젝트**.
+Connectivity 팀의 Android Engineer II JD 를 기반으로 만든 **BLE 학습 프로젝트**.
 실제 ESP32 보드를 peripheral 로 두고 Android 앱이 central 로 동작하도록 구성했습니다.
 
 ## 학습 목표
