@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "WhoopBLEPractice"
+rootProject.name = "BlePractice"
 include(":app")
  
